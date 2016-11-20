@@ -5,7 +5,7 @@ $(document).ready(function() {
 
 	loadPageContents();
 
-//functions
+//FUNCTIONS
 	
 	//takes what's in the data div and splits it up into indexes and values (index:"item" as value:"cat")
 	function get(search) {
@@ -54,6 +54,41 @@ $(document).ready(function() {
 		buildPage(pagePicked);
 	}
 
+//"Create" Functions
+	function createPreviews() {
+		$("#preview").empty()
+		.append("<div class='previewdiv_face'></div>")
+		.append("<div class='previewdiv_zoom'></div>")
+		.append("<div class='previewdiv_profile'></div>");
+	}
+
+	function createCat() {
+		$(".previewdiv_face").empty().append("<div id='catface' class='catpart_face previewPart' style='background-color: black'></div>");
+		$(".previewdiv_profile").empty().append("<div id='catprofile' class='catpart_profile previewPart' style='background-color: black'></div>");
+	}
+
+	function createDog() {
+		$(".previewdiv_face").empty().append("<div id='dogface' class='dogpart_face previewPart' style='background-color: black'></div>");
+		$(".previewdiv_profile").empty()
+			.append("<div id='dogprofile' class='dogpart_profile previewPart' style='background-color: black'></div>")
+			.append("<div id='dogprofile_backFRONTLEG' class='dogpart_profile previewPart' style='background-color: black'></div>")
+			.append("<div id='dogprofile_backBACKLEG' class='dogpart_profile previewPart' style='background-color: black'></div>")
+			.append("<div id='dogprofile_ears' class='dogpart_profile previewPart' style='background-color: black'></div>")
+			.append("<div id='dogprofile_ear_line' class='dogpart_profile line' style='background-color: white'></div>");
+	}
+
+	function createBunny() {
+		$(".previewdiv_face").empty()
+			.append("<div id='bunnyface' class='bunnypart_face previewPart' style='background-color: black'></div>");
+				
+		$(".previewdiv_profile").empty()
+			.append("<div id='bunnyprofile' class='bunnypart_profile previewPart' style='background-color: black'></div>")
+			.append("<div id='bunnyprofile_ear_front' class='bunnypart_profile previewPart' style='background-color: black'></div>")
+			.append("<div id='bunnyprofile_ear_back' class='bunnypart_profile previewPart' style='background-color: black'></div>")
+			.append("<div id='bunnyprofile_ear_line' class='bunnypart_profile line' style='background-color:white'></div>")
+			.append("<div id='bunnyprofile_backleg' class='bunnypart_profile previewPart' style='background-color: black'></div>")
+			.append("<div id='bunnyprofile_backleg_line' class='bunnypart_profile line' style='background-color:white'></div>");
+	}
 //build page(s)
 
 	//instructions will be based on which page is passed in as your input (item, yarn, mc, etc.)
@@ -65,37 +100,37 @@ $(document).ready(function() {
 		//append the item options
 			$("#options").empty()
 			.append("<button id='CAT' class='btn btn-lg btn-success' value='cat'>Cat</button>")
+			.append("<button id='DOG' class='btn btn-lg btn-success' value='dog'>Dog</button>")
 			.append("<button id='BUNNY' class='btn btn-lg btn-success' value='bunny'>Bunny</button>");
 			
 		//append the item preview
-			$("#preview").empty()
-			.append("<div class='previewdiv_face'></div>")
-			.append("<div class='previewdiv_profile'></div>");
+			createPreviews();
 
 		//Hover Cat	
 			$(document).on("mouseenter", "#CAT", function() {
-				$(".previewdiv_face").empty().append("<div id='catface' class='catpart_face' style='background-color: black'></div>");
-				$(".previewdiv_profile").empty().append("<div id='catprofile' class='catpart_profile' style='background-color: black'></div>");
+				createCat();
 			});
 			$(document).on("mouseleave", "#CAT", function() {
-				$(".previewdiv_face").empty();
-				$(".previewdiv_profile").empty();
+				createPreviews();
 			});
+
+		//Hover Dog
+			$(document).on("mouseenter", "#DOG", function() {
+				createDog();
+			});
+
+			$(document).on("mouseleave", "#DOG", function() {
+				createPreviews();
+			});
+	
 
 		//Hover Bunny
 			$(document).on("mouseenter", "#BUNNY", function() {
-				$(".previewdiv_face").empty().append("<div id='bunnyface' class='bunnypart_face' style='background-color: black'></div>");
-				$(".previewdiv_profile").empty().append("<div id='bunnyprofile' class='bunnypart_profile' style='background-color: black'></div>")
-					.append("<div id='bunnyprofile_ear_front' class='bunnypart_profile' style='background-color: black'></div>")
-					.append("<div id='bunnyprofile_ear_back' class='bunnypart_profile' style='background-color: black'></div>")
-					.append("<div id='bunnyprofile_ear_line' class='bunnypart_profile' style='background-color:white'></div>")
-					.append("<div id='bunnyprofile_backleg' class='bunnypart_profile' style='background-color: black'></div>")
-					.append("<div id='bunnyprofile_backleg_line' class='bunnypart_profile' style='background-color: white'></div>");
+				createBunny();
 			});
 
 			$(document).on("mouseleave", "#BUNNY", function() {
-				$(".previewdiv_face").empty();
-				$(".previewdiv_profile").empty();
+				createPreviews();
 			});
 
 		//Click
@@ -119,50 +154,140 @@ $(document).ready(function() {
 		//append the yarn options	
 			$("#options").empty()
 				.append("<button id='Homespun' class='btn btn-lg btn-success' value='Homespun'>Lion Brand Homespun</button>")
-				.append("<button id='Caron' style='color:white' class='btn btn-lg btn-success' value='Caron'>Caron Simply Soft</button>");
+				.append("<button id='Caron' class='btn btn-lg btn-success' value='Caron'>Caron Simply Soft</button>")
+				.append("<button id='Pipsqueak' class='btn btn-lg btn-success' value='Pipsqueak'>Bernat Pipsqueak</button>")
+				.append("<button id='Parfait' class='btn btn-lg btn-success' value='Parfait'>Parfait</button>")
+				.append("<button id='KnitPicks' class='btn btn-lg btn-success' value='KnitPicks'>KnitPicks Comfy</button>");
 		
 		//append the yarn preview	
-			$("#preview").empty()
-				.append("<div class='previewdiv_face'></div>")
-				.append("<div class='previewdiv_profile'></div>");
+			createPreviews();
 
-		//set Cat		
+		//createCat		
 			if( get("item") === "cat") {
-				$(".previewdiv_face").empty().append("<div id='catface' class='catpart_face previewPart' style='background-color: black'></div>");
-				$(".previewdiv_profile").empty().append("<div id='catprofile' class='catpart_profile previewPart' style='background-color: black'></div>");
+				createCat();
 			}
 
-		//set Bunny	
+		//createDog		
+			if( get("item") === "dog") {
+				createDog();
+			}
+
+		//createBunny	
 			else if ( get("item") === "bunny") {
-				$(".previewdiv_face").empty()
-					.append("<div id='bunnyface' class='bunnypart_face previewPart' style='background-color: black'></div>");
-				
-				$(".previewdiv_profile").empty()
-					.append("<div id='bunnyprofile' class='bunnypart_profile previewPart' style='background-color: black'></div>")
-					.append("<div id='bunnyprofile_ear_front' class='bunnypart_profile previewPart' style='background-color: black'></div>")
-					.append("<div id='bunnyprofile_ear_back' class='bunnypart_profile previewPart' style='background-color: black'></div>")
-					.append("<div id='bunnyprofile_ear_line' class='bunnypart_profile line' style='background-color:white'></div>")
-					.append("<div id='bunnyprofile_backleg' class='bunnypart_profile previewPart' style='background-color: black'></div>")
-					.append("<div id='bunnyprofile_backleg_line' class='bunnypart_profile line' style='background-color:white'></div>");
+				createBunny();
 			}
 
-		//Hover Cat/Bunny
+		//Hover
 			$(document).on("mouseenter", "button", function() {	
 				var yarn = this.value;
-				$(".previewPart").css("background-image", "url("+yarn+".jpg)").css("background-size", "cover");
+				$(".previewdiv_zoom").css("background-image", "url("+yarn+".jpg)").css("background-size", "250%");
+				$(".previewPart").css("background-image", "url("+yarn+".jpg)");
 				$(".line").css("background-color", "black");
 			});
-			$(document).on("mouseleave", "button", function() {	
+			$(document).on("mouseleave", "button", function() {
+				$(".previewdiv_zoom").css("background-image", "none").css("background-color", "white");	
 				$(".previewPart").css("background-image", "none").css("background-color", "black");
 				$(".line").css("background-color", "white");
 			});
+
+		//Click	
+			$(document).on("click", "button", function() {
+				var yarn = this.value;
+				var currentData = $("#data").text();
+				var newData = currentData.replace("yarn=&", "yarn="+yarn+"&");
+				//$("#data").empty().append(newData);
+				$("#data").text(newData);
+
+				loadPageContents();
+			});
 		}
 
-		//Click Cat/Bunny
-
 // MC (MAIN COLOR)
-/*		else if (pagePicked === "mc") {
+
+		else if (pagePicked === "mc") {
 			console.log(get("mc"));
+
+			$("#options").empty();
+
+			createPreviews();
+
+		//append the color options
+			if (get ("yarn") === "Homespun")	{
+				$("#options")
+					//ALL THE HOMESPUN COLORS as buttons
+					.append("<button id='homespunbarley' class='btn btn-lg btn-success' value='homespunbarley'>Barley</button>");
+			}
+
+			else if (get("yarn") === "Caron") {
+				$("#options")
+					//ALL THE CARON COLORS as buttons
+					.append("<button id='caronblack' class='btn btn-lg btn-success' value='caronblack'>Black</button>");
+			}
+
+			else if (get("yarn") === "Pipsqueak") {
+				$("#options")
+					//ALL THE PIPSQUEAK COLORS as buttons
+					.append("<button id='pipsqueakwhite' class='btn btn-lg btn-success' value='pipsqueakwhite'>White</button>");
+			}	
+
+			else if (get("yarn") === "Parfait") {
+				$("#options")
+					//ALL THE PARFAIT COLORS as buttons
+					.append("<button id='parfaitcandycorn' class='btn btn-lg btn-success' value='parfaitcandycorn'>Candy Corn</button>");
+			}	
+
+			else if (get("yarn") === "KnitPicks") {
+				$("#options")
+					//ALL THE KnitPicks COLORS as buttons
+					.append("<button id='KPwhite' class='btn btn-lg btn-success' value='KPwhite'>(KnitPicks) White</button>");
+			}	
+		
+		//append the preview divs
+			createPreviews();
+
+		//createCat		
+			if( get("item") === "cat") {
+				createCat();
+			}
+
+		//createBunny	
+			else if ( get("item") === "bunny") {
+				createBunny();
+			}
+		}
+
+	};
+});
+
+
+/*
+
+		//Hover
+			$(document).on("mouseenter", "button", function() {	
+				var yarn = this.value;
+				$(".previewdiv_zoom").css("background-image", "url("+yarn+".jpg)").css("background-size", "250%");
+				$(".previewPart").css("background-image", "url("+yarn+".jpg)");
+				$(".line").css("background-color", "black");
+			});
+			$(document).on("mouseleave", "button", function() {
+				$(".previewdiv_zoom").css("background-image", "none").css("background-color", "white");	
+				$(".previewPart").css("background-image", "none").css("background-color", "black");
+				$(".line").css("background-color", "white");
+			});
+
+		//Click	
+			$(document).on("click", "button", function() {
+				var yarn = this.value;
+				var currentData = $("#data").text();
+				var newData = currentData.replace("yarn=&", "yarn="+yarn+"&");
+				//$("#data").empty().append(newData);
+				$("#data").text(newData);
+
+				loadPageContents();
+			});
+		}	
+		
+/*
 
 			$("#options").empty()
 				.append("<button id='Homespun' class='btn btn-lg btn-success' style='color:white' value='Homespun'>Lion Brand Homespun</button>")
@@ -182,7 +307,7 @@ $(document).ready(function() {
 		}
 */
 
-	}
+
 
 
 
@@ -356,4 +481,3 @@ function buildArrays(){
 				$arraynocc = array("nocc", "", "NONE");
 }
 */
-});
