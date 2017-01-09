@@ -153,11 +153,11 @@ $(document).ready(function() {
 		}
 
 		var yarn = {
-			"Pipsqueak":Pipsqueak,
-			"Homespun":Homespun,
-			"Caron":Caron,
-			"Parfait":Parfait,
-			"KnitPicks":KnitPicks
+			"Bernat Pipsqueak":Pipsqueak,
+			"Lion Brand Homespun":Homespun,
+			"Caron Simply Soft":Caron,
+			"Premier Parfait":Parfait,
+			"KnitPicks Comfy":KnitPicks
 		}
 
 		loadPageContents();
@@ -165,21 +165,45 @@ $(document).ready(function() {
 //FUNCTIONS
 	
 	//takes what's in the data div and splits it up into indexes and values (index:"item" as value:"cat")
-	function get(search) {
-		var data = $("#data").text();
-		var dataArray = data.split("&");
+	// function get(search) {
+	// 	var data = $("#data").text();
+	// 	var dataArray = data.split("&");
 
+	// 	var pairsArray = [];
+	// 	var i = 0;
+	// 	while (i < dataArray.length) {
+	// 		var index = dataArray[i].substring(0,dataArray[i].indexOf("="));
+	// 		var value = dataArray[i].substring(dataArray[i].indexOf("=")+1);
+	// 		pairsArray[index] = value;
+	// 		i++;
+	// 	}
+
+	// 	return pairsArray[search];
+	// }
+
+	//get from URL
+	function get(search) {
+	//gets the part of the URL after the basic stuff and turns it into a string, then gets rid of the ? by starting one after that
+		var data = String (location.search).substr(1);
+		var dataArray = data.split("&");
 		var pairsArray = [];
 		var i = 0;
 		while (i < dataArray.length) {
 			var index = dataArray[i].substring(0,dataArray[i].indexOf("="));
 			var value = dataArray[i].substring(dataArray[i].indexOf("=")+1);
+			value = value.replace(/\*/g, " ");
 			pairsArray[index] = value;
 			i++;
 		}
 
-		return pairsArray[search];
+		if (typeof pairsArray[search] === "undefined") {
+			return "";
+		}
+		else {
+			return pairsArray[search];
+		}
 	}
+
 
 	//searches for index, returns value - if value has a length of zero, that's the page you're on
 	function loadPageContents() {
@@ -202,8 +226,12 @@ $(document).ready(function() {
 		else if ( get("accent_color").length === 0) {
 			var pagePicked = "accent_color";
 		}
-		else if ( get("email").length === 0) {
+		else if ( get("submit").length === 0) {
 			var pagePicked = "email";
+		}
+
+		else {
+			var pagePicked = "success";
 		}
 
 		console.log(pagePicked);
@@ -223,7 +251,7 @@ $(document).ready(function() {
 			$(".previewdiv_face").empty()
 				.append("<div id='catface' class='catpart_face previewPart yarnable' style='background-color: black'></div>")
 				.append("<div id='catface_nose' class='catpart_face previewPart' style='background-color: pink'></div>")
-				.append("<div id='catface_nose_line' class='catpart_face previewPart' style='background-color: black'></div>")
+				.append("<div id='catface_nose_line' class='catpart_face previewPart line' style='background-color: black'></div>")
 				.append("<div id='catface_pupil_left' class='catpart_face previewPart pupils' style='background-color: black'></div>")
 				.append("<div id='catface_pupil_right' class='catpart_face previewPart pupils' style='background-color: black'></div>")
 				.append("<div id='catface_iris_left' class='catpart_face previewPart accentable' style='background-color: white'></div>")
@@ -238,11 +266,12 @@ $(document).ready(function() {
 				.append("<div id='catprofile' class='catpart_profile previewPart yarnable' style='background-color: black'></div>")
 				.append("<div id='catprofile_legline_front' class='catpart_profile previewPart line'></div>")
 				.append("<div id='catprofile_legline_back' class='catpart_profile previewPart line'></div>")
+				.append("<div id='catprofile_nose' class='catpart_profile previewPart'></div>")
+				.append("<div id='catprofile_eye' class='catpart_profile previewPart line'></div>")
 				.append("<div id='catprofile_ears' class='catpart_profile previewPart yarnable contrastable' style='background-color: black'></div>")
 				.append("<div id='catprofile_nose-area' class='catpart_profile previewPart yarnable contrastable' style='background-color: black'></div>")
 				.append("<div id='catprofile_muzzle' class='catpart_profile previewPart yarnable contrastable' style='background-color: black'></div>")
 				.append("<div id='catprofile_stomach' class='catpart_profile previewPart yarnable contrastable' style='background-color: black'></div>")
-				.append("<div id='catprofile_chest' class='catpart_profile previewPart yarnable contrastable' style='background-color: black'></div>")
 				.append("<div id='catprofile_chin' class='catpart_profile previewPart yarnable contrastable' style='background-color: black'></div>")
 				.append("<div id='catprofile_paw_front_left' class='catpart_profile yarnable previewPart contrastable' style='background-color: black'></div>")
 				.append("<div id='catprofile_paw_front_right' class='catpart_profile yarnable previewPart contrastable' style='background-color: black'></div>")
@@ -255,11 +284,12 @@ $(document).ready(function() {
 
 		function createCatButtons() {
 			//Liz, make sure you update this - James
+			// ears, nose area, muzzle, chin
 			$("#options").empty()
 				.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_ears'>Ears</button>")
-				.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_nose-area, catface_nose-area'>Nose Area</button>")
-				.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_muzzle,catface_muzzle'>Muzzle</button>")
-				.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_chin, catface_chin'>Chin and Stomach</button>")
+				.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_nose-area'>Nose Area</button>")
+				.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_muzzle'>Muzzle</button>")
+				.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_chin,catprofile_stomach,catface_chin'>Chin and Stomach</button>")
 
 				.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_paw_front_right'>Right Front Paw</button>")
 				.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_paw_front_left'>Left Front Paw</button>")
@@ -373,12 +403,7 @@ $(document).ready(function() {
 			//Click
 				$(document).on("click", ".itembutton", function() {
 					var item = this.value;
-					var currentData = $("#data").text();
-					var newData = currentData.replace("item=&", "item="+item+"&");
-					//$("#data").empty().append(newData);
-					$("#data").text(newData);
-
-					loadPageContents();
+					location.search = "item=" + item;
 				});
 		}
 
@@ -388,11 +413,11 @@ $(document).ready(function() {
 
 			//append the yarn options	
 				$("#options").empty()
-					.append("<button id='Homespun' class='btn btn-lg btn-default yarnbutton' value='Homespun'>Lion Brand Homespun</button>")
-					.append("<button id='Caron' class='btn btn-lg btn-default yarnbutton' value='Caron'>Caron Simply Soft</button>")
-					.append("<button id='Pipsqueak' class='btn btn-lg btn-default yarnbutton' value='Pipsqueak'>Bernat Pipsqueak</button>")
-					.append("<button id='Parfait' class='btn btn-lg btn-default yarnbutton' value='Parfait'>Parfait</button>")
-					.append("<button id='KnitPicks' class='btn btn-lg btn-default yarnbutton' value='KnitPicks'>KnitPicks Comfy</button>");
+					.append("<button id='Homespun' class='btn btn-lg btn-default yarnbutton' value='Lion Brand Homespun'>Lion Brand Homespun</button>")
+					.append("<button id='Caron' class='btn btn-lg btn-default yarnbutton' value='Caron Simply Soft'>Caron Simply Soft</button>")
+					.append("<button id='Pipsqueak' class='btn btn-lg btn-default yarnbutton' value='Bernat Pipsqueak'>Bernat Pipsqueak</button>")
+					.append("<button id='Parfait' class='btn btn-lg btn-default yarnbutton' value='Premier Parfait'>Premier Parfait</button>")
+					.append("<button id='KnitPicks' class='btn btn-lg btn-default yarnbutton' value='KnitPicks Comfy'>KnitPicks Comfy</button>");
 			
 			//append the yarn preview	
 				createPreviews();
@@ -416,8 +441,9 @@ $(document).ready(function() {
 				$(document).on("mouseenter", ".yarnbutton", function() {
 					$(this).removeClass("btn-default").addClass("btn-success");
 					var yarn = this.value;
-					$(".previewdiv_zoom").css("background-image", "url("+yarn+".jpg)").css("background-size", "250%");
-					$(".yarnable").css("background-image", "url("+yarn+".jpg)");
+					console.log (yarn);
+					$(".previewdiv_zoom").css("background-image", "url("+yarn.replace(/ /g, "%20")+".jpg)").css("background-size", "250%");
+					$(".yarnable").css("background-image", "url("+yarn.replace(/ /g, "%20")+".jpg)");
 					$(".line").css("background-color", "black");
 				});
 				$(document).on("mouseleave", ".yarnbutton", function() {
@@ -430,12 +456,7 @@ $(document).ready(function() {
 			//Click	
 				$(document).on("click", ".yarnbutton", function() {
 					var yarn = this.value;
-					var currentData = $("#data").text();
-					var newData = currentData.replace("yarn=&", "yarn="+yarn+"&");
-					//$("#data").empty().append(newData);
-					$("#data").text(newData);
-
-					loadPageContents();
+					location.search = location.search + "&yarn=" + yarn;
 				});
 		}
 
@@ -447,6 +468,7 @@ $(document).ready(function() {
 
 			//get yarn type from data div
 				var yarntype = get("yarn");
+				yarntype = yarntype.replace(/%20/g, " ").replace(/\+/g, " ");
 				console.log(yarntype);
 
 			//get array of keys (colors for that yarn type)
@@ -494,12 +516,7 @@ $(document).ready(function() {
 			//Click	
 				$(document).on("click", ".mcbutton", function() {
 					var MC = this.id;
-					var currentData = $("#data").text();
-					var newData = currentData.replace("mc=&", "mc="+MC+"&");
-					//$("#data").empty().append(newData);
-					$("#data").text(newData);
-
-					loadPageContents();
+					location.search = location.search + "&mc=" + MC;
 				});
 		}
 
@@ -511,10 +528,12 @@ $(document).ready(function() {
 
 			//get yarn type from data div
 				var yarntype = get("yarn");
+				yarntype = yarntype.replace(/%20/g, " ").replace(/\+/g, " ");
 				console.log(yarntype);
 
 			//get MC from data div
 				var mainColor = get("mc");
+				mainColor = mainColor.replace(/%20/g, " ").replace(/\+/g, " ");
 				console.log(mainColor);
 
 			//get array of keys (colors for that yarn type)
@@ -570,19 +589,11 @@ $(document).ready(function() {
 			//Click	
 				$(document).on("click", ".ccbutton", function() {
 					var CC = this.id;
-					var currentData = $("#data").text();
-					var newData = currentData.replace("cc=&", "cc="+CC+"&");
-					//$("#data").empty().append(newData);
-					$("#data").text(newData);
+					location.search = location.search + "&cc=" + CC;
 
 					if (CC === "noCC") {
-						var currentData = $("#data").text();
-						var newData = currentData.replace("cc_areas=&", "cc_areas=noCC&");
-						//$("#data").empty().append(newData);
-						$("#data").text(newData);
+						location.search = location.search + "&cc=noCC&cc_areas=noCC";
 					}
-
-					loadPageContents();
 				});
 		}
 
@@ -592,20 +603,24 @@ $(document).ready(function() {
 
 			createPreviews();
 
-			//get item from data div
+			//get item from URL
 				var item = get("item");
+				item = item.replace(/%20/g, " ").replace(/\+/g, " ");
 				console.log(item);
 
 			//get yarn type from data div
 				var yarntype = get("yarn");
+				yarntype = yarntype.replace(/%20/g, " ").replace(/\+/g, " ");
 				console.log(yarntype);
 
 			//get MC from data div
 				var mainColor = get("mc");
+				mainColor = mainColor.replace(/%20/g, " ").replace(/\+/g, " ");
 				console.log(mainColor);
 
 			//get CC from data div
 				var contrastingColor = get("cc");
+				contrastingColor = contrastingColor.replace(/%20/g, " ").replace(/\+/g, " ");
 				console.log(contrastingColor);
 
 			//append the preview divs
@@ -679,22 +694,12 @@ $(document).ready(function() {
 
 					var cc_areas_final = areasArray.join(",");
 
-					var currentData = $("#data").text();
-					var newData = currentData.replace("cc_areas=&", "cc_areas="+cc_areas_final+"&");
-					//$("#data").empty().append(newData);
-					$("#data").text(newData);
-
-					loadPageContents();
+					location.search = location.search + "&cc_areas="+cc_areas_final;
 				});
 
 			//No Contrasting Areas
 				$(document).on("click", "#noCC_areas", function() {
-					var currentData = $("#data").text();
-					var newData = currentData.slice(0,currentData.indexOf("&cc=")) + "&cc=noCC&cc_areas=noCC&accent_color=&email=&";
-					//$("#data").empty().append(newData);
-					$("#data").text(newData);
-
-					loadPageContents();
+					location.search = String (location.search).substring(0, String (location.search).indexOf("&cc=")) + "&cc=noCC&cc_areas=noCC";
 				});
 		}
 
@@ -706,22 +711,27 @@ $(document).ready(function() {
 
 			//get item from data div
 				var item = get("item");
+				item = item.replace(/%20/g, " ").replace(/\+/g, " ");
 				console.log(item);
 
 			//get yarn type from data div
 				var yarntype = get("yarn");
+				yarntype = yarntype.replace(/%20/g, " ").replace(/\+/g, " ");
 				console.log(yarntype);
 
 			//get MC from data div
 				var mainColor = get("mc");
+				mainColor = mainColor.replace(/%20/g, " ").replace(/\+/g, " ");
 				console.log(mainColor);
 
 			//get CC from data div
 				var contrastingColor = get("cc");
+				contrastingColor = contrastingColor.replace(/%20/g, " ").replace(/\+/g, " ");
 				console.log(contrastingColor);
 
 			//get active CC_areas from data div
 				var active_cc_areas = get("cc_areas");
+				active_cc_areas = active_cc_areas.replace(/%20/g, " ").replace(/\+/g, " ");
 				active_cc_areasArray = active_cc_areas.split(",");
 				console.log(active_cc_areasArray);
 
@@ -794,12 +804,7 @@ $(document).ready(function() {
 			//Click	
 				$(document).on("click", ".accent_color_button", function() {
 					var accent_color = this.value;
-					var currentData = $("#data").text();
-					var newData = currentData.replace("accent_color=&", "accent_color="+accent_color+"&");
-					//$("#data").empty().append(newData);
-					$("#data").text(newData);
-
-					loadPageContents();
+					location.search = location.search + "&accent_color=" + accent_color;
 				});
 		}
 
@@ -811,27 +816,33 @@ $(document).ready(function() {
 
 			//get item from data div
 				var item = get("item");
+				item = item.replace(/%20/g, " ").replace(/\+/g, " ");
 				console.log(item);
 
 			//get yarn type from data div
 				var yarntype = get("yarn");
+				yarntype = yarntype.replace(/%20/g, " ").replace(/\+/g, " ");
 				console.log(yarntype);
 
 			//get MC from data div
 				var mainColor = get("mc");
+				mainColor = mainColor.replace(/%20/g, " ").replace(/\+/g, " ");
 				console.log(mainColor);
 
 			//get CC from data div
 				var contrastingColor = get("cc");
+				contrastingColor = contrastingColor.replace(/%20/g, " ").replace(/\+/g, " ");
 				console.log(contrastingColor);
 
 			//get active CC_areas from data div
 				var active_cc_areas = get("cc_areas");
+				active_cc_areas = active_cc_areas.replace(/%20/g, " ").replace(/\+/g, " ");
 				active_cc_areasArray = active_cc_areas.split(",");
 				console.log(active_cc_areasArray);
 
 			//get accent color
 				var accent_color = get("accent_color");
+				accent_color = accent_color.replace(/%20/g, " ").replace(/\+/g, " ");
 				console.log(contrastingColor);
 
 			//append the preview divs
@@ -909,30 +920,31 @@ $(document).ready(function() {
 					.append("Contrasting Areas: " + active_cc_areas + "<br>")
 					.append("Eye Color: " + accent_color);
 
-			//email body
-				var body = "Hello! I would like to place an order for a new " + item + " made of " + yarntype + " yarn. The color(s) should be " + mainColor + " (and " + contrastingColor + "). These areas should have a contrasting color: " + active_cc_areas + ". The accent color should be " + accent_color + ". Thank you! I look forward to my new " + item + "!";
-				var link = "mailto:kniterativedesigns@gmail.com?subject=Kniterative Designs order&body=" + body;
-
 			//buttons
-				$("#options").append("<textarea rows='5' class='form-control' id='details' placeholder='Add additional details here...'></textarea>")
-				.append("<a href='" + link + "' class='btn btn-primary btn-lg' id='email' style='height: 100px; font-size: 36px'>Looks Good! Email Order</a>")
+				$("#options").append("<input type='email' class='form-control' id='email' placeholder='Your email address'></input>")
+				.append("<textarea rows='5' class='form-control' id='details' placeholder='Add additional details here...'></textarea>")
+				.append("<button class='btn btn-primary btn-lg' id='submit' style='height: 100px; font-size: 36px'>Place Order!</button>")
 				.append("<button class='btn btn-danger btn-lg' id='cancel'>Start Over</button>");
+
+			//Submit
+				$(document).on("click", "#submit", function() {
+					var email = $("#email").val();
+					var notes = $("#details").val();
+					if (email.length > 0) {
+						$("#options").append("<iframe height='0' width='0' frameborder='0' src='https://script.google.com/macros/s/AKfycbzL6ubgMPxnkSAXGbDepVPE0MJi2GSL7p-Z5zow9uAXU7l9gawt/exec" + location.search + "&email=" + email + "&notes=" + notes + "'></iframe>");
+						location.search = location.search + "&submit=true";
+					}
+				});
 
 			//Cancel	
 				$(document).on("click", "#cancel", function() {
-					var newData = "item=&yarn=&mc=&cc=&cc_areas=&accent_color=&email=&";
-					//$("#data").empty().append(newData);
-					$("#data").text(newData);
-
-					loadPageContents();
+					location.search = "";
 				});
+		}
 
-			//Key listener
-				$("#details").keyup(function() {
-					if ( String( $("#details").val() ).length > 0) {
-						$("#email").attr("href",link + " " + String( $("#details").val() ) );
-					}
-				});
+// SUCCESS (Confirmation Page)
+		else if (pagePicked === "success") {
+			$("body").append("<div>Success!</div>");
 		}
 	}
 
