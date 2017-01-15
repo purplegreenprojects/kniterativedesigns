@@ -3,6 +3,8 @@ body {
 	padding:0px;
 	margin: 0px;
 	border: 0px;
+	background-color: lightgray;
+	overflow: hidden;
 }
 
 html, body {
@@ -21,34 +23,73 @@ button {
 
 .btn {
 	margin-bottom: 10px;
+	border: 0px;
+}
+
+.alert {
+	margin: 10px 0px 0px 0px;
 }
 
 /* Page Layout */
 	#header {
 		width: 100%;
-		height: 15%;
+		height: 80px;
 		float:left;
-		background-color: white;
 		margin: 0px;
 		font-family:Pacifico, serif;
 		font-size: 36px;
 		line-height: 200%;
+		background-color: gray;
 	}
 
 	#options {
-		width: calc(100vw - 760px);
-		/*height: 500px;*/
+		width: calc(100vw - 810px);
 		float:left;
-		background-color:white;
-		margin: 0px;
-		padding: 0px 50px 0px 5px;
+		margin: 0px 43px 0px 0px;
+		height: calc(100vh - 105px);
+	}
+
+	#optionsScroll {
+		padding: 10px 15px 0px 5px;
+		margin-bottom: 0px;
+		overflow-y: scroll;
+		overflow-x: hidden;
+		height: 100%;
+		width: 100%;
+	}
+
+	#optionsLock {
+		padding: 10px 22px 0px 5px;
+		height: 0%;
+		width: 100%;
+		position: relative;
+		bottom: 0px;
+		z-index: 1;
+	}
+
+	#congratulations {
+		padding: 10px;
+		text-align: left;
+	}
+
+	::-webkit-scrollbar {
+	    -webkit-appearance: none;
+	    width: 7px;
+	}
+	::-webkit-scrollbar-thumb {
+	    border-radius: 4px;
+	    background-color: rgba(0,0,0,.5);
+	    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+	}
+
+	::-webkit-scrollbar-corner {
+		height: 0px;
 	}
 
 	#preview {
 		width: 760px;
 		height: 500px;
 		float:left;
-		background-color: white;
 		margin: 0px;
 		text-align: center;
 		padding: 0px 5px 0px 0px;
@@ -56,22 +97,15 @@ button {
 
 	#footer {
 		width: 100%;
-		height: 10%;
-		float:left;
-		background-color:white;
+		height: 25px;
+		position: absolute;
+		bottom: 0px;
 		margin: 0px;
-	}
-
-	#data {
-		width: 100%;
-		height: 20%;
-		float:left;
-		background-color: gray;
-		margin: 0px;
+		background-color: darkgray;
+		z-index: 100;
 	}
 
 /* Font Stuff */
-
 	.headings {
 		font-family:Pacifico, serif;
 		font-size: 36px;
@@ -101,7 +135,6 @@ button {
 		width: 250px;
 		/*background: gray;
 	  	background: -webkit-radial-gradient(white, #3385ff);*/
-	  	background: white;
 	  	float:left;
 	}
 
@@ -110,7 +143,6 @@ button {
 		width: 500px;
 		/*background: gray;
 	  	background: -webkit-radial-gradient(white, #3385ff);*/
-	  	background: white;
 		float:left;
 		margin-right: 5px;
 	}
@@ -118,15 +150,31 @@ button {
 	.previewdiv_zoom {
 		height: 230px;
 		width: 230px;
-		background: white;
 	  	float:left;
 	  	border-radius: 100%;
 	  	margin: 10px;
-	  	/*border: solid black 5px;*/
+	  	/*box-shadow: 0px 0px 50px #000000;*/
 	}
 
 	.line {
 		background-color: black;
+	}
+
+
+	.left-half-button {
+		width: calc(50% - 5px);
+		margin-right: 5px;
+	}
+
+	.right-half-button {
+		width: calc(50% - 5px);
+		margin-left: 5px;
+	}
+
+	#details {
+		margin: 10px 0px 10px 0px;
+		min-width: 100%;
+		max-width: 100%;
 	}
 
 /* Bunny */

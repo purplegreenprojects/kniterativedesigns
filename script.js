@@ -1,6 +1,5 @@
 
 $(document).ready(function() {
-	$("#data").text("item=&yarn=&mc=&cc=&cc_areas=&accent_color=&email=&");
 
 	//YARN COLOR INFORMATION
 		// Object = {
@@ -13,6 +12,8 @@ $(document).ready(function() {
 		// (index =    0,      1,      2)
 
 		var Pipsqueak = {
+			//"Color":["url","light/dark"], // "key": [0,1],
+
 			"White":"http://yarnspirations.s3.amazonaws.com/catalog/product/cache/1/thumbnail/150x/9df78eab33525d08d6e5fb8d27136e95/S/W/SW-59005-162059-B-PIP-WhiteyWhite.jpg",
 			"Vanilla":"http://yarnspirations.s3.amazonaws.com/catalog/product/cache/1/thumbnail/150x/9df78eab33525d08d6e5fb8d27136e95/S/W/SW-59008-162059-B-PIP-Vanilla_1.jpg",
 			"Chocolate":"http://yarnspirations.s3.amazonaws.com/catalog/product/cache/1/thumbnail/150x/9df78eab33525d08d6e5fb8d27136e95/S/W/SW-59012-162059-B-PIP-Chocolate.jpg",
@@ -153,37 +154,20 @@ $(document).ready(function() {
 		}
 
 		var yarn = {
-			"Bernat Pipsqueak":Pipsqueak,
-			"Lion Brand Homespun":Homespun,
-			"Caron Simply Soft":Caron,
-			"Premier Parfait":Parfait,
-			"KnitPicks Comfy":KnitPicks
+			"Caron Simply Soft":[Caron,"this is caron"],
+			"KnitPicks Comfy":[KnitPicks,"this is knitpicks"],
+			"Lion Brand Homespun":[Homespun,"This is lion brand"],
+			"Bernat Pipsqueak":[Pipsqueak,"This is bernat"],
+			"Premier Parfait":[Parfait,"and this is parfait"]
 		}
 
 		loadPageContents();
 
 //FUNCTIONS
-	
-	//takes what's in the data div and splits it up into indexes and values (index:"item" as value:"cat")
-	// function get(search) {
-	// 	var data = $("#data").text();
-	// 	var dataArray = data.split("&");
-
-	// 	var pairsArray = [];
-	// 	var i = 0;
-	// 	while (i < dataArray.length) {
-	// 		var index = dataArray[i].substring(0,dataArray[i].indexOf("="));
-	// 		var value = dataArray[i].substring(dataArray[i].indexOf("=")+1);
-	// 		pairsArray[index] = value;
-	// 		i++;
-	// 	}
-
-	// 	return pairsArray[search];
-	// }
 
 	//get from URL
 	function get(search) {
-	//gets the part of the URL after the basic stuff and turns it into a string, then gets rid of the ? by starting one after that
+		//gets the part of the URL after the basic stuff and turns it into a string, then gets rid of the ? by starting one after that
 		var data = String (location.search).substr(1);
 		var dataArray = data.split("&");
 		var pairsArray = [];
@@ -208,7 +192,10 @@ $(document).ready(function() {
 	//searches for index, returns value - if value has a length of zero, that's the page you're on
 	function loadPageContents() {
 
-		if ( get("item").length === 0) {
+		if ( get("start").length === 0) {
+			var pagePicked = "welcome";
+		}
+		else if ( get("item").length === 0) {
 			var pagePicked = "item";
 		}
 		else if ( get("yarn").length === 0) {
@@ -267,7 +254,7 @@ $(document).ready(function() {
 				.append("<div id='catprofile_legline_front' class='catpart_profile previewPart line'></div>")
 				.append("<div id='catprofile_legline_back' class='catpart_profile previewPart line'></div>")
 				.append("<div id='catprofile_nose' class='catpart_profile previewPart'></div>")
-				.append("<div id='catprofile_eye' class='catpart_profile previewPart line'></div>")
+				.append("<div id='catprofile_eye' class='catpart_profile previewPart line accentable'></div>")
 				.append("<div id='catprofile_ears' class='catpart_profile previewPart yarnable contrastable' style='background-color: black'></div>")
 				.append("<div id='catprofile_nose-area' class='catpart_profile previewPart yarnable contrastable' style='background-color: black'></div>")
 				.append("<div id='catprofile_muzzle' class='catpart_profile previewPart yarnable contrastable' style='background-color: black'></div>")
@@ -285,16 +272,16 @@ $(document).ready(function() {
 		function createCatButtons() {
 			//Liz, make sure you update this - James
 			// ears, nose area, muzzle, chin
-			$("#options").empty()
+			$("#optionsScroll").empty()
 				.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_ears'>Ears</button>")
 				.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_nose-area'>Nose Area</button>")
 				.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_muzzle'>Muzzle</button>")
 				.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_chin,catprofile_stomach,catface_chin'>Chin and Stomach</button>")
 
-				.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_paw_front_right'>Right Front Paw</button>")
-				.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_paw_front_left'>Left Front Paw</button>")
-				.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_paw_back_right'>Right Back Paw</button>")
-				.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_paw_back_left'>Left Back Paw</button>")
+				.append("<button class='btn btn-lg btn-default cc_areas_button left-half-button' value='catprofile_paw_front_right'>Right Front Paw</button>")
+				.append("<button class='btn btn-lg btn-default cc_areas_button right-half-button' value='catprofile_paw_back_right'>Right Back Paw</button>")
+				.append("<button class='btn btn-lg btn-default cc_areas_button left-half-button' value='catprofile_paw_front_left'>Left Front Paw</button>")
+				.append("<button class='btn btn-lg btn-default cc_areas_button right-half-button' value='catprofile_paw_back_left'>Left Back Paw</button>")
 				.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_tail'>Tail</button>");
 		}
 
@@ -313,7 +300,7 @@ $(document).ready(function() {
 
 		function createDogButtons() {
 			//Liz, make sure you update this - James
-			$("#options").empty()
+			$("#optionsScroll").empty()
 				.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_tail'>tail</button>")
 				.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_muzzle,catface_muzzle'>muzzle</button>");
 		}
@@ -346,7 +333,7 @@ $(document).ready(function() {
 
 		function createBunnyButtons() {
 			//Liz, make sure you update this - James
-			$("#options").empty()
+			$("#optionsScroll").empty()
 				.append("<button class='btn btn-lg btn-default cc_areas_button' value='bunnyprofile_tail_whole'>tail</button>")
 				.append("<button class='btn btn-lg btn-default cc_areas_button' value='bunnyprofile_chin,bunnyface_chin,bunnyprofile_stomach'>chin and stomach</button>");
 		}
@@ -355,11 +342,28 @@ $(document).ready(function() {
 		//instructions will be based on which page is passed in as your input (item, yarn, mc, etc.)
 		function buildPage(pagePicked) {
 
+// WELCOME
+		if (pagePicked === "welcome") {
+
+			//remove extra divs
+				$("#options").remove();
+				$("#preview").remove();
+
+			//append the welcome message and start button
+				$("#header").after("<div id='welcome'>Welcome!</div>");
+				$("#welcome").append("<button id='start' class='btn btn-lg btn-primary'>Start</button>");
+
+			//Click
+				$(document).on("click","#start",function() {
+					location.search = "start=true";
+				});
+		}
+
 // ITEM
-		if (pagePicked === "item") {
+		else if (pagePicked === "item") {
 
 			//append the item options
-				$("#options").empty()
+				$("#optionsScroll").empty()
 				.append("<button id='CAT' class='btn btn-lg btn-default itembutton' value='cat'>Cat</button>")
 				.append("<button id='DOG' class='btn btn-lg btn-default itembutton' value='dog'>Dog</button>")
 				.append("<button id='BUNNY' class='btn btn-lg btn-default itembutton' value='bunny'>Bunny</button>");
@@ -403,7 +407,7 @@ $(document).ready(function() {
 			//Click
 				$(document).on("click", ".itembutton", function() {
 					var item = this.value;
-					location.search = "item=" + item;
+					location.search = location.search + "&item=" + item;
 				});
 		}
 
@@ -411,14 +415,16 @@ $(document).ready(function() {
 		else if (pagePicked === "yarn") {
 			console.log(get("item"));
 
+			//get array of keys (yarntypes)
+				var keys = Object.keys(yarn);
+
 			//append the yarn options	
-				$("#options").empty()
-					.append("<button id='Homespun' class='btn btn-lg btn-default yarnbutton' value='Lion Brand Homespun'>Lion Brand Homespun</button>")
-					.append("<button id='Caron' class='btn btn-lg btn-default yarnbutton' value='Caron Simply Soft'>Caron Simply Soft</button>")
-					.append("<button id='Pipsqueak' class='btn btn-lg btn-default yarnbutton' value='Bernat Pipsqueak'>Bernat Pipsqueak</button>")
-					.append("<button id='Parfait' class='btn btn-lg btn-default yarnbutton' value='Premier Parfait'>Premier Parfait</button>")
-					.append("<button id='KnitPicks' class='btn btn-lg btn-default yarnbutton' value='KnitPicks Comfy'>KnitPicks Comfy</button>");
-			
+				$("#optionsScroll").empty();
+
+				for (i = 0; i < keys.length; i++) {
+					$("#optionsScroll").append("<button id='" + keys[i].replace(/\s/g,"_") + "' class='btn btn-lg btn-default yarnbutton' value='" + keys[i] + "' title='" + yarn[ keys[i] ][1] + "'>" + keys[i] + "</button>");
+				}
+
 			//append the yarn preview	
 				createPreviews();
 
@@ -448,7 +454,7 @@ $(document).ready(function() {
 				});
 				$(document).on("mouseleave", ".yarnbutton", function() {
 					$(this).addClass("btn-default").removeClass("btn-success");
-					$(".previewdiv_zoom").css("background-image", "none").css("background-color", "white");	
+					$(".previewdiv_zoom").css("background-image", "none").css("background-color", "rgba(000,000,000,0)");	
 					$(".yarnable").css("background-image", "none").css("background-color", "black");
 					$(".line").css("background-color", "white");
 				});
@@ -462,7 +468,7 @@ $(document).ready(function() {
 
 // MC (MAIN COLOR)
 		else if (pagePicked === "mc") {
-			$("#options").empty();
+			$("#optionsScroll").empty();
 
 			createPreviews();
 
@@ -472,12 +478,12 @@ $(document).ready(function() {
 				console.log(yarntype);
 
 			//get array of keys (colors for that yarn type)
-				keys = Object.keys(yarn[yarntype]);
+				keys = Object.keys(yarn[yarntype][0]);
 				console.log(keys);
 
 			//loop through the keys to create the option buttons for all colors
 				for (i = 0; i < keys.length; i++) {
-					$("#options").append("<button id='" + keys[i] + "' class='btn btn-lg btn-default mcbutton' value='" + yarn[yarntype][ keys[i] ] + "'>" + keys[i] + "</button>");
+					$("#optionsScroll").append("<button id='" + keys[i] + "' class='btn btn-lg btn-default mcbutton' value='" + yarn[yarntype][0][ keys[i] ] + "'>" + keys[i] + "</button>");
 				}
 			
 			//append the preview divs
@@ -508,7 +514,7 @@ $(document).ready(function() {
 				});
 				$(document).on("mouseleave", ".mcbutton", function() {
 					$(this).addClass("btn-default").removeClass("btn-success");
-					$(".previewdiv_zoom").css("background-image", "none").css("background-color", "white");	
+					$(".previewdiv_zoom").css("background-image", "none").css("background-color", "rgba(000,000,000,0)");	
 					$(".yarnable").css("background-image", "none").css("background-color", "black");
 					$(".line").css("background-color", "white");
 				});
@@ -522,7 +528,7 @@ $(document).ready(function() {
 
 // CC (CONTRASTING COLOR)
 		else if (pagePicked === "cc") {
-			$("#options").empty();
+			$("#optionsScroll").empty();
 
 			createPreviews();
 
@@ -537,14 +543,14 @@ $(document).ready(function() {
 				console.log(mainColor);
 
 			//get array of keys (colors for that yarn type)
-				keys = Object.keys(yarn[yarntype]);
+				keys = Object.keys(yarn[yarntype][0]);
 				console.log(keys);
 
 			//loop through the keys to create the option buttons for all colors
-				$("#options").append("<button id= 'noCC' class='btn btn-lg btn-default ccbutton' value='" + yarn[yarntype][mainColor] + "'>No Contrasting Color</button>");
+				$("#optionsScroll").append("<button id= 'noCC' class='btn btn-lg btn-default ccbutton' value='" + yarn[yarntype][0][mainColor] + "'>No Contrasting Color</button>");
 				for (i = 0; i < keys.length; i++) {
 					if (keys[i] !== mainColor) {
-						$("#options").append("<button id='" + keys[i] + "' class='btn btn-lg btn-default ccbutton' value='" + yarn[yarntype][ keys[i] ] + "'>" + keys[i] + "</button>");
+						$("#optionsScroll").append("<button id='" + keys[i] + "' class='btn btn-lg btn-default ccbutton' value='" + yarn[yarntype][0][ keys[i] ] + "'>" + keys[i] + "</button>");
 					}
 				}
 			
@@ -567,7 +573,7 @@ $(document).ready(function() {
 				}
 
 			//add mainColor
-				var mcURL = yarn[yarntype][mainColor];
+				var mcURL = yarn[yarntype][0][mainColor];
 				$(".previewdiv_zoom").css("background-image", "url("+mcURL+")").css("background-size","250%");	
 				$(".yarnable").css("background-image", "url("+mcURL+")");
 
@@ -599,7 +605,7 @@ $(document).ready(function() {
 
 // CC AREAS (CONTRASTING COLOR AREAS)
 		else if (pagePicked === "cc_areas") {
-			$("#options").empty();
+			$("#optionsScroll").empty();
 
 			createPreviews();
 
@@ -645,16 +651,19 @@ $(document).ready(function() {
 				}
 
 			//create extra noCC button and Submit button
-				$("#options").append("<button class='btn btn-primary btn-lg' id='cc_areas_submit' style='height: 100px; font-size: 36px'>Submit</button>");
-				$("#options").append("<button id='noCC_areas' class='btn btn-lg btn-danger' value='noCC'>No Contrasting Areas</button>");
+				$("#optionsLock").append("<button class='btn btn-primary btn-lg' id='cc_areas_submit' style='height: 75px; font-size: 36px'>Submit</button>");
+				$("#optionsLock").append("<button id='noCC_areas' class='btn btn-lg btn-danger' value='noCC'>No Contrasting Areas</button>");
+
+				$("#optionsLock").css("height","150px");
+				$("#optionsScroll").css("height","calc(100% - 150px");
 
 			//add mainColor
-				var mcURL = yarn[yarntype][mainColor];
+				var mcURL = yarn[yarntype][0][mainColor];
 				$(".previewdiv_zoom").css("background-image", "url("+mcURL+")").css("background-size","250%");	
 				$(".yarnable").css("background-image", "url("+mcURL+")");
 
 			//add contrastingColor
-				var ccURL = yarn[yarntype][contrastingColor];
+				var ccURL = yarn[yarntype][0][contrastingColor];
 
 			//Hover
 				$(document).on("mouseenter", ".cc_areas_button", function() {
@@ -705,7 +714,7 @@ $(document).ready(function() {
 
 // ACCENT COLOR
 		else if (pagePicked === "accent_color") {
-			$("#options").empty();
+			$("#optionsScroll").empty();
 
 			createPreviews();
 
@@ -745,7 +754,8 @@ $(document).ready(function() {
 
 			//createBunny	
 				else if ( get("item") === "bunny") {
-					createBunny();
+					//createBunny();
+					location.search = location.search + "&accent_color=none";
 				}
 
 			//createDog
@@ -754,12 +764,12 @@ $(document).ready(function() {
 				}
 
 			//add mainColor
-				var mcURL = yarn[yarntype][mainColor];
+				var mcURL = yarn[yarntype][0][mainColor];
 				$(".previewdiv_zoom").css("background-image", "url("+mcURL+")").css("background-size","250%");	
 				$(".yarnable").css("background-image", "url("+mcURL+")");
 
 			//add contrastingColor
-				var ccURL = yarn[yarntype][contrastingColor];
+				var ccURL = yarn[yarntype][0][contrastingColor];
 				for (i = 0; i < active_cc_areasArray.length; i++) {
 					$("#" + active_cc_areasArray[i]).show().css("background-image", "url("+ccURL+")");
 				}
@@ -780,7 +790,7 @@ $(document).ready(function() {
 					var keys = Object.keys(eyeColors);
 
 					for (i = 0; i < keys.length; i++) {
-						$("#options").append("<button class='btn btn-lg btn-default accent_color_button' value='" + keys[i] + "' style='border: 5px solid " + eyeColors[keys[i]] + "'>" + keys[i] + "</button>");
+						$("#optionsScroll").append("<button class='btn btn-lg btn-default accent_color_button' value='" + keys[i] + "' style='border: 5px solid " + eyeColors[keys[i]] + "'>" + keys[i] + "</button>");
 					}
 				}
 
@@ -810,7 +820,7 @@ $(document).ready(function() {
 
 // EMAIL
 		else if (pagePicked === "email") {
-			$("#options").empty();
+			$("#optionsScroll").empty();
 
 			createPreviews();
 
@@ -864,12 +874,12 @@ $(document).ready(function() {
 				}
 
 			//add mainColor
-				var mcURL = yarn[yarntype][mainColor];
+				var mcURL = yarn[yarntype][0][mainColor];
 				$(".previewdiv_zoom").css("background-image", "url("+mcURL+")").css("background-size","250%");	
 				$(".yarnable").css("background-image", "url("+mcURL+")");
 
 			//add contrastingColor
-				var ccURL = yarn[yarntype][contrastingColor];
+				var ccURL = yarn[yarntype][0][contrastingColor];
 				for (i = 0; i < active_cc_areasArray.length; i++) {
 					$("#" + active_cc_areasArray[i]).show().css("background-image", "url("+ccURL+")");
 				}
@@ -912,7 +922,8 @@ $(document).ready(function() {
 					active_cc_areas = active_cc_areas.slice(0,(active_cc_areas.length) - 2);
 				}
 
-				$("#options").append("Congratulations! Your Order:<br>")
+				$("#optionsScroll").append("<div id='congratulations'></div>");
+				$("#congratulations").append("Congratulations! Your Order:<br>")
 					.append("Item: " + item + "<br>")
 					.append("Yarn: " + yarntype + "<br>")
 					.append("Main Color: " + mainColor +"<br>")
@@ -921,7 +932,8 @@ $(document).ready(function() {
 					.append("Eye Color: " + accent_color);
 
 			//buttons
-				$("#options").append("<input type='email' class='form-control' id='email' placeholder='Your email address'></input>")
+				$("#optionsScroll").append("<input type='email' class='form-control' id='email' placeholder='Your email address'></input>")
+				.append("<div id='errorMessage'></div>")
 				.append("<textarea rows='5' class='form-control' id='details' placeholder='Add additional details here...'></textarea>")
 				.append("<button class='btn btn-primary btn-lg' id='submit' style='height: 100px; font-size: 36px'>Place Order!</button>")
 				.append("<button class='btn btn-danger btn-lg' id='cancel'>Start Over</button>");
@@ -929,10 +941,25 @@ $(document).ready(function() {
 			//Submit
 				$(document).on("click", "#submit", function() {
 					var email = $("#email").val();
-					var notes = $("#details").val();
-					if (email.length > 0) {
+					var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+					if ((email.length > 0) && (regex.test(email))) {
+						var notes = $("#details").val();
+
+						if (!(notes.length > 0)) {
+							notes = "-";
+						}
+						else {
+							notes = notes.replace(/\'/g,"’");
+						}
+
 						$("#options").append("<iframe height='0' width='0' frameborder='0' src='https://script.google.com/macros/s/AKfycbzL6ubgMPxnkSAXGbDepVPE0MJi2GSL7p-Z5zow9uAXU7l9gawt/exec" + location.search + "&email=" + email + "&notes=" + notes + "'></iframe>");
-						location.search = location.search + "&submit=true";
+
+						var Timeout = setTimeout(function() {
+							location.search = location.search + "&submit=true";
+						}, 1000);
+					}
+					else {
+						$("#errorMessage").empty().append('<div class="alert alert-danger" role="alert">Please enter a valid email address so I can contact you!</div>')
 					}
 				});
 
@@ -944,7 +971,9 @@ $(document).ready(function() {
 
 // SUCCESS (Confirmation Page)
 		else if (pagePicked === "success") {
-			$("body").append("<div>Success!</div>");
+			$("#preview").remove();
+			$("#options").remove();
+			$("#header").after("<div id='successMessage'>Success!</div>");
 		}
 	}
 
