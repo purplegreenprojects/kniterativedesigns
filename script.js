@@ -1,7 +1,7 @@
 
 $(document).ready(function() {
 
-	//YARN COLOR INFORMATION
+//YARN COLOR INFORMATION
 		// Object = {
 		// 	"key":"value",
 		// 	"key":"value",
@@ -346,12 +346,17 @@ $(document).ready(function() {
 		if (pagePicked === "welcome") {
 
 			//remove extra divs
+				$("#header").remove();
 				$("#options").remove();
 				$("#preview").remove();
 
 			//append the welcome message and start button
-				$("#header").after("<div id='welcome'>Welcome!</div>");
-				$("#welcome").append("<button id='start' class='btn btn-lg btn-primary'>Start</button>");
+				$("body").append("<div id='welcome1'></div>");
+
+				$("#welcome1").append("<img id='welcome_fulllogo' src='images/KDfull_logo(5000).png' alt='Kniterative Designs'>")
+					
+					.after("<div id='welcome2'>Welcome to the Kniterative Designs custom orders website.<br>Here you can design your own knitted animal by choosing the yarn texture, yarn color, and pattern that you want. Feel free to try different combinations until you find the one that's just right.<br>Ready?</div>");
+				$("#welcome2").append("<button id='start' class='btn btn-lg' style='background-color:gray'><b>Enter Site<b></button>");
 
 			//Click
 				$(document).on("click","#start",function() {
@@ -362,6 +367,13 @@ $(document).ready(function() {
 // ITEM
 		else if (pagePicked === "item") {
 
+			//checkmarks
+				$("#animal_true").hide();
+				$("#texture_true").hide();
+				$("#color_true").hide();
+				$("#details_true").hide();
+				$("#placeorder_true").hide();
+
 			//append the item options
 				$("#optionsScroll").empty()
 				.append("<button id='CAT' class='btn btn-lg btn-default itembutton' value='cat'>Cat</button>")
@@ -371,25 +383,31 @@ $(document).ready(function() {
 			//append the item preview
 				createPreviews();
 
+				$("#preview").append("<div id='catdogbunny_for_mobile'></div>");
+
 			//Hover Cat	
 				$(document).on("mouseenter", "#CAT", function() {
 					$(this).removeClass("btn-default").addClass("btn-success");
 					createCat();
+					$("#catdogbunny_for_mobile").hide();
 				});
 				$(document).on("mouseleave", "#CAT", function() {
 					$(this).addClass("btn-default").removeClass("btn-success");
 					createPreviews();
+					$("#catdogbunny_for_mobile").show();
 				});
 
 			//Hover Dog
 				$(document).on("mouseenter", "#DOG", function() {
 					$(this).removeClass("btn-default").addClass("btn-success");
 					createDog();
+					$("#catdogbunny_for_mobile").hide();
 				});
 
 				$(document).on("mouseleave", "#DOG", function() {
 					$(this).addClass("btn-default").removeClass("btn-success");
 					createPreviews();
+					$("#catdogbunny_for_mobile").show();
 				});
 		
 
@@ -397,11 +415,13 @@ $(document).ready(function() {
 				$(document).on("mouseenter", "#BUNNY", function() {
 					$(this).removeClass("btn-default").addClass("btn-success");
 					createBunny();
+					$("#catdogbunny_for_mobile").hide();
 				});
 
 				$(document).on("mouseleave", "#BUNNY", function() {
 					$(this).addClass("btn-default").removeClass("btn-success");
 					createPreviews();
+					$("#catdogbunny_for_mobile").show();
 				});
 
 			//Click
@@ -414,6 +434,13 @@ $(document).ready(function() {
 // YARN
 		else if (pagePicked === "yarn") {
 			console.log(get("item"));
+
+			//checkmarks
+				$("#animal_true").show();
+				$("#texture_true").hide();
+				$("#color_true").hide();
+				$("#details_true").hide();
+				$("#placeorder_true").hide();
 
 			//get array of keys (yarntypes)
 				var keys = Object.keys(yarn);
@@ -448,8 +475,8 @@ $(document).ready(function() {
 					$(this).removeClass("btn-default").addClass("btn-success");
 					var yarn = this.value;
 					console.log (yarn);
-					$(".previewdiv_zoom").css("background-image", "url("+yarn.replace(/ /g, "%20")+".jpg)").css("background-size", "250%");
-					$(".yarnable").css("background-image", "url("+yarn.replace(/ /g, "%20")+".jpg)");
+					$(".previewdiv_zoom").css("background-image", "url(images/"+yarn.replace(/ /g, "%20")+".jpg)").css("background-size", "250%");
+					$(".yarnable").css("background-image", "url(images/"+yarn.replace(/ /g, "%20")+".jpg)");
 					$(".line").css("background-color", "black");
 				});
 				$(document).on("mouseleave", ".yarnbutton", function() {
@@ -468,6 +495,14 @@ $(document).ready(function() {
 
 // MC (MAIN COLOR)
 		else if (pagePicked === "mc") {
+
+			//checkmarks
+				$("#animal_true").show();
+				$("#texture_true").show();
+				$("#color_true").hide();
+				$("#details_true").hide();
+				$("#placeorder_true").hide();
+
 			$("#optionsScroll").empty();
 
 			createPreviews();
@@ -528,6 +563,14 @@ $(document).ready(function() {
 
 // CC (CONTRASTING COLOR)
 		else if (pagePicked === "cc") {
+
+			//checkmarks
+				$("#animal_true").show();
+				$("#texture_true").show();
+				$("#color_true").hide();
+				$("#details_true").hide();
+				$("#placeorder_true").hide();
+
 			$("#optionsScroll").empty();
 
 			createPreviews();
@@ -605,6 +648,14 @@ $(document).ready(function() {
 
 // CC AREAS (CONTRASTING COLOR AREAS)
 		else if (pagePicked === "cc_areas") {
+
+			//checkmarks
+				$("#animal_true").show();
+				$("#texture_true").show();
+				$("#color_true").show();
+				$("#details_true").hide();
+				$("#placeorder_true").hide();
+
 			$("#optionsScroll").empty();
 
 			createPreviews();
@@ -652,10 +703,10 @@ $(document).ready(function() {
 
 			//create extra noCC button and Submit button
 				$("#optionsLock").append("<button class='btn btn-primary btn-lg' id='cc_areas_submit' style='height: 75px; font-size: 36px'>Submit</button>");
-				$("#optionsLock").append("<button id='noCC_areas' class='btn btn-lg btn-danger' value='noCC'>No Contrasting Areas</button>");
+				$("#optionsLock").append("<button id='noCC_areas' class='btn btn-lg btn-danger' value='noCC' style='height: 50px'>No Contrasting Areas</button>");
 
-				$("#optionsLock").css("height","150px");
-				$("#optionsScroll").css("height","calc(100% - 150px");
+				$("#optionsLock").css("height","125px");
+				$("#optionsScroll").css("height","calc(100% - 125px");
 
 			//add mainColor
 				var mcURL = yarn[yarntype][0][mainColor];
@@ -714,6 +765,14 @@ $(document).ready(function() {
 
 // ACCENT COLOR
 		else if (pagePicked === "accent_color") {
+
+			//checkmarks
+				$("#animal_true").show();
+				$("#texture_true").show();
+				$("#color_true").show();
+				$("#details_true").hide();
+				$("#placeorder_true").hide();
+
 			$("#optionsScroll").empty();
 
 			createPreviews();
@@ -820,6 +879,14 @@ $(document).ready(function() {
 
 // EMAIL
 		else if (pagePicked === "email") {
+
+			//checkmarks
+				$("#animal_true").show();
+				$("#texture_true").show();
+				$("#color_true").show();
+				$("#details_true").show();
+				$("#placeorder_true").hide();
+
 			$("#optionsScroll").empty();
 
 			createPreviews();
@@ -923,20 +990,16 @@ $(document).ready(function() {
 				}
 
 				$("#optionsScroll").append("<div id='congratulations'></div>");
-				$("#congratulations").append("Congratulations! Your Order:<br>")
-					.append("Item: " + item + "<br>")
-					.append("Yarn: " + yarntype + "<br>")
-					.append("Main Color: " + mainColor +"<br>")
-					.append("Contrasting Color: " + contrastingColor + "<br>")
-					.append("Contrasting Areas: " + active_cc_areas + "<br>")
-					.append("Eye Color: " + accent_color);
+				$("#congratulations").append("Congratulations!<br>Your " + item + " looks great! I'll start knitting it right away!")
+					.append("<br>Please give me your email address so I can contact you regarding your order.")
 
 			//buttons
 				$("#optionsScroll").append("<input type='email' class='form-control' id='email' placeholder='Your email address'></input>")
 				.append("<div id='errorMessage'></div>")
+				.append("If you have any special requests, please  list them here:")
 				.append("<textarea rows='5' class='form-control' id='details' placeholder='Add additional details here...'></textarea>")
-				.append("<button class='btn btn-primary btn-lg' id='submit' style='height: 100px; font-size: 36px'>Place Order!</button>")
-				.append("<button class='btn btn-danger btn-lg' id='cancel'>Start Over</button>");
+				.append("<button class='btn btn-primary btn-lg' id='submit' style='height: 100px; font-size: 36px'>Place Order! <i class='fa fa-thumbs-o-up'></i></button>")
+				.append("<button class='btn btn-danger btn-lg' id='cancel'><i class='fa fa-trash-o'></i> Start Over</button>");
 
 			//Submit
 				$(document).on("click", "#submit", function() {
@@ -965,12 +1028,20 @@ $(document).ready(function() {
 
 			//Cancel	
 				$(document).on("click", "#cancel", function() {
-					location.search = "";
+					location.search = "?start=true";
 				});
 		}
 
 // SUCCESS (Confirmation Page)
 		else if (pagePicked === "success") {
+
+			//checkmarks
+				$("#animal_true").show();
+				$("#texture_true").show();
+				$("#color_true").show();
+				$("#details_true").show();
+				$("#placeorder_true").show();
+
 			$("#preview").remove();
 			$("#options").remove();
 			$("#header").after("<div id='successMessage'>Success!</div>");
