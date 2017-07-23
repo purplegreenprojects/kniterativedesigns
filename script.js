@@ -286,7 +286,10 @@ $(document).ready(function() {
 		}
 
 		function createDog() {
-			$(".previewdiv_face").empty().append("<div id='dogface' class='dogpart_face previewPart' style='background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/disp/8e427328807052.56053ef96e121.jpg); background-repeat: no-repeat; background-size: contain'></div>");
+			$(".previewdiv_face").empty()
+				.append("<div id='dogface' class='dogpart_face previewPart' style='background-color: black' background-repeat: no-repeat; background-size: contain'></div>");
+				
+			
 			$(".previewdiv_profile").empty()
 				.append("<div id='dogprofile' class='dogpart_profile previewPart yarnable' style='background-color: black'></div>")
 				.append("<div id='dogprofile_backFRONTLEG' class='dogpart_profile previewPart yarnable' style='background-color: black'></div>")
