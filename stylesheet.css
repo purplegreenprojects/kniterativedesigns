@@ -83,25 +83,26 @@
 	#welcome1 {
 		height: 50vh;
 		width: 100vw;
-		padding: 1vh 30vw 1vh 30vw;
+		text-align: center;
 		background-color: #8585ad;
 		 background: radial-gradient(#8585ad, #666699);		
 	}
 
 	/* full logo image */
 		#welcome_fulllogo {
-			width: 30vw; 
-			height: 30vw;
+			width: 50vh; 
+			height: 50vh;
+			margin: auto auto;
+			background-image: url('images/KDfull_logo(5000).png');
+			background-size: contain;
 		}
 
 	#welcome2 {
-		font-size: 1.5vw;
+		font-size: 28px;
 		width: 100vw;
-		height: 40vh;
-		padding: 0px 30vw 20px 30vw;
+		height: calc(50vh - 25px);
+		text-align: center;
 		overflow: scroll;
-		/*overflow-y: scroll;
-		overflow-x: hidden;*/
 	}
 
 /* header */
@@ -121,12 +122,22 @@
 		overflow: hidden;
 	}
 
-			.steps {
+			.steps_format {
 				padding: 5px;
 				font-family: Roboto Condensed;
 				font-size: 18px;
 				display: inline-block;
-				line-height: 100%;
+				line-height: 125%;
+			}
+
+			.steps {
+				padding: 5px;
+				display:inline-block;
+			}
+
+			.steps:hover {
+				cursor: pointer;
+				text-shadow: -2px 1px 10px white;
 			}
 
 			.between_steps {
@@ -165,13 +176,13 @@
 			height: 0%;
 			width: 100%;
 			position: relative;
-			bottom: 0px;
+			bottom: 25px;
 			z-index: 1;
 		}
 
 		#optionsScroll {
 			padding: 10px 15px 0px 5px;
-			margin-bottom: 0px;
+			margin-bottom: 25px;
 			overflow-y: scroll;
 			overflow-x: hidden;
 			height: 100%;
@@ -807,8 +818,21 @@
 
 /* mobile */
 	@media screen and (max-width: 980px) {
+
+		#welcome2 {
+			font-size: 42px;
+			width: 100vw;
+			height: calc(50vh - 25px);
+			text-align: center;
+			overflow: scroll;
+		}
+
 		.steps {
 			font-size: 35px;
+		}
+
+		.steps_format {
+			line-height: 200%;
 		}
 
 		.between_steps {
