@@ -237,7 +237,9 @@ $(document).ready(function() {
 					.append("<div id='catface_nose' class='catpart_face previewPart' style='background-color: pink'></div>")
 					.append("<div id='catface_nose_line' class='catpart_face previewPart line' style='background-color: black'></div>")
 					.append("<div id='catface_pupil_left' class='catpart_face previewPart pupils' style='background-color: black'></div>")
+					.append("<div id='catface_pupil_leftSPOT' class='catpart_face previewPart' style='background-color: white'></div>")
 					.append("<div id='catface_pupil_right' class='catpart_face previewPart pupils' style='background-color: black'></div>")
+					.append("<div id='catface_pupil_rightSPOT' class='catpart_face previewPart' style='background-color: white'></div>")
 					.append("<div id='catface_iris_left' class='catpart_face previewPart accentable' style='background-color: white'></div>")
 					.append("<div id='catface_iris_right' class='catpart_face previewPart accentable' style='background-color: white'></div>")
 					.append("<div id='catface_ear_left' class='catpart_face previewPart yarnable contrastable' style='background-color: black'></div>")
@@ -286,60 +288,84 @@ $(document).ready(function() {
 				$(".previewdiv_face").empty()
 					.append("<div id='dogface' class='dogpart_face previewPart yarnable' style='background-color: black' background-repeat: no-repeat; background-size: contain'></div>")
 					.append("<div id='dogface_nose' class='dogpart_face previewPart' style='background-color: black' background-repeat: no-repeat; background-size: contain'></div>")
-					.append("<div id='dogface_nose_line' class='dogpart_face previewPart line' style='background-color: black' background-repeat: no-repeat; background-size: contain'></div>")
+					.append("<div id='dogface_nose_line' class='dogpart_face previewPart line' style='background-color: white' background-repeat: no-repeat; background-size: contain'></div>")
+					.append("<div id='dogface_mouth_line' class='dogpart_face previewPart line' style='background-color: white' background-repeat: no-repeat; background-size: contain'></div>")
 					
-						.append("<div id='dogface_pupil_left' class='dogpart_face previewPart pupils' style='background-color: black'></div>")
-						.append("<div id='dogface_pupil_right' class='dogpart_face previewPart pupils' style='background-color: black'></div>")
+					.append("<div id='dogface_ear_left' class='dogpart_face previewPart yarnable' style='background-color: black'></div>")
+					.append("<div id='dogface_ear_left_LINE' class='dogpart_face previewPart line' style='background-color: white'></div>")
+					.append("<div id='dogface_ear_right' class='dogpart_face previewPart yarnable' style='background-color: black'></div>")
+					.append("<div id='dogface_ear_right_LINE' class='dogpart_face previewPart line' style='background-color: white'></div>")
+					.append("<div id='dogface_chin' class='dogpart_face previewPart yarnable' style='background-color: black'></div>")
+						
+					.append("<div id='dogface_pupil_left' class='dogpart_face previewPart pupils' style='background-color: black'></div>")
+					.append("<div id='dogface_pupil_leftSPOT' class='dogpart_face previewPart' style='background-color: white'></div>")
+					.append("<div id='dogface_pupil_right' class='dogpart_face previewPart pupils' style='background-color: black'></div>")
+					.append("<div id='dogface_pupil_rightSPOT' class='dogpart_face previewPart' style='background-color: white'></div>")
+						
 						.append("<div id='dogface_iris_left' class='dogpart_face previewPart accentable' style='background-color: white'></div>")
 						.append("<div id='dogface_iris_right' class='dogpart_face previewPart accentable' style='background-color: white'></div>")
-					
-					.append("<div id='dogface_ear_left' class='dogpart_face previewPart yarnable contrastable' style='background-color: black'></div>")
-					.append("<div id='dogface_ear_right' class='dogpart_face previewPart yarnable contrastable' style='background-color: black'></div>")
-					.append("<div id='dogface_chin' class='dogpart_face previewPart yarnable contrastable' style='background-color: black'></div>")
-					
+						.append("<div id='dogface_ear_leftCC' class='dogpart_face previewPart yarnable contrastable' style='background-color: black'></div>")
+						.append("<div id='dogface_ear_rightCC' class='dogpart_face previewPart yarnable contrastable' style='background-color: black'></div>")
 						.append("<div id='dogface_nose-area' class='dogpart_face previewPart yarnable contrastable' style='background-color: black'></div>")
 						.append("<div id='dogface_muzzle' class='dogpart_face previewPart yarnable contrastable' style='background-color: black'></div>")
-
+						.append("<div id='dogface_chinCC' class='dogpart_face previewPart yarnable contrastable' style='background-color: black'></div>")
 
 				$(".previewdiv_profile").empty()
 					.append("<div id='dogprofile' class='dogpart_profile previewPart yarnable' style='background-color: black'></div>")
-					.append("<div id='dogprofile_legline_front' class='dogpart_profile previewPart line'></div>")
+					.append("<div id='dogprofile_legline_front' class='dogpart_profile previewPart line' style='background-color: white'></div>")
 					.append("<div id='dogprofile_backFRONTLEG' class='dogpart_profile previewPart yarnable' style='background-color: black'></div>")
-					.append("<div id='dogprofile_stomach' class='dogpart_profile previewPart yarnable contrastable' style='background-color: black'></div>")
-					.append("<div id='dogprofile_legline_back' class='dogpart_profile previewPart line'></div>")
+					.append("<div id='dogprofile_legline_back' class='dogpart_profile previewPart line' style='background-color: white'></div>")
 					.append("<div id='dogprofile_backBACKLEG' class='dogpart_profile previewPart yarnable' style='background-color: black'></div>")
 					
 
 					.append("<div id='dogprofile_ears' class='dogpart_profile previewPart yarnable' style='background-color: black'></div>")
-					.append("<div id='dogprofile_ear_line' class='dogpart_profile line' style='background-color: white'></div>")
-					.append("<div id='dogprofile_nose' class='dogpart_profile previewPart'></div>")
-					.append("<div id='dogprofile_eye' class='dogpart_profile previewPart line accentable'></div>")
+					.append("<div id='dogprofile_ear_line' class='dogpart_profile previewPart line' style='background-color: white'></div>")
+					.append("<div id='dogprofile_nose' class='dogpart_profile previewPart' style='background-color:black'></div>")
+					.append("<div id='dogprofile_nose_line' class='dogpart_profile previewPart line' style='background-color:white'></div>")
+					.append("<div id='dogprofile_eye' class='dogpart_profile previewPart line accentable' style='background-color:white'></div>")
 
-
+					.append("<div id='dogprofile_earsCC' class='dogpart_profile previewPart yarnable contrastable' style='background-color: black'></div>")
 					.append("<div id='dogprofile_nose-area' class='dogpart_profile previewPart yarnable contrastable' style='background-color: black'></div>")
 					.append("<div id='dogprofile_muzzle' class='dogpart_profile previewPart yarnable contrastable' style='background-color: black'></div>")
-					.append("<div id='dogprofile_chin' class='dogpart_profile previewPart yarnable contrastable' style='background-color: black'></div>")
+					.append("<div id='dogprofile_shoulders' class='dogpart_profile previewPart yarnable contrastable' style='background-color: black'></div>")
+					.append("<div id='dogprofile_chin_chest' class='dogpart_profile previewPart yarnable contrastable' style='background-color: black'></div>")
 					.append("<div id='dogprofile_paw_front_left' class='dogpart_profile yarnable previewPart contrastable' style='background-color: black'></div>")
 					.append("<div id='dogprofile_paw_front_right' class='dogpart_profile yarnable previewPart contrastable' style='background-color: black'></div>")
 					.append("<div id='dogprofile_paw_back_left' class='dogpart_profile yarnable previewPart contrastable' style='background-color: black'></div>")
 					.append("<div id='dogprofile_paw_back_right' class='dogpart_profile yarnable previewPart contrastable' style='background-color: black'></div>")
+					.append("<div id='dogprofile_stomach' class='dogpart_profile previewPart yarnable contrastable' style='background-color: black'></div>")
 					.append("<div id='dogprofile_tail' class='dogpart_profile previewPart yarnable contrastable' style='background-color: black'></div>")
 
 				$(".contrastable").hide();
-				//Liz, add pupils class to dog pupils
 			}
 
 			function createDogButtons() {
-				//Liz, make sure you update this - James
+
 				$("#optionsScroll").empty()
-					.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_tail'>tail</button>")
-					.append("<button class='btn btn-lg btn-default cc_areas_button' value='catprofile_muzzle,catface_muzzle'>muzzle</button>");
+					.append("<button class='btn btn-lg btn-default cc_areas_button' value='dogprofile_earsCC,dogface_ear_rightCC,dogface_ear_leftCC'>Ears</button>")
+					.append("<button class='btn btn-lg btn-default cc_areas_button' value='dogprofile_nose-area,dogface_nose-area'>Nose Area</button>")
+					.append("<button class='btn btn-lg btn-default cc_areas_button' value='dogprofile_muzzle,dogface_muzzle'>Muzzle</button>")
+					.append("<button class='btn btn-lg btn-default cc_areas_button' value='dogprofile_shoulders,dogprofile_paw_front_right,dogprofile_paw_front_left'>Shoulders</button>")
+					.append("<button class='btn btn-lg btn-default cc_areas_button' value='dogprofile_chin_chest,dogprofile_stomach,dogface_chinCC'>Chin, Chest, and Stomach</button>")
+
+					.append("<button class='btn btn-lg btn-default cc_areas_button left-half-button' value='dogprofile_paw_front_right'>Right Front Paw</button>")
+					.append("<button class='btn btn-lg btn-default cc_areas_button right-half-button' value='dogprofile_paw_back_right'>Right Back Paw</button>")
+					.append("<button class='btn btn-lg btn-default cc_areas_button left-half-button' value='dogprofile_paw_front_left'>Left Front Paw</button>")
+					.append("<button class='btn btn-lg btn-default cc_areas_button right-half-button' value='dogprofile_paw_back_left'>Left Back Paw</button>")
+					.append("<button class='btn btn-lg btn-default cc_areas_button' value='dogprofile_tail'>Tail</button>");
 			}
 
 			function createBunny() {
 				$(".previewdiv_face").empty()
 					.append("<div id='bunnyface' class='bunnypart_face previewPart yarnable' style='background-color: black'></div>")
-					.append("<div id='bunnyface_chin' class='bunnypart_face previewPart yarnable contrastable' style='background-color:black'></div>");
+					.append("<div id='bunnyface_pupil_left' class='bunnypart_face previewPart pupils' style='background-color: black'></div>")
+					.append("<div id='bunnyface_pupil_right' class='bunnypart_face previewPart pupils' style='background-color: black'></div>")
+					.append("<div id='bunnyface_pupilSPOT_left' class='bunnypart_face previewPart' style='background-color: White'></div>")
+					.append("<div id='bunnyface_pupilSPOT_right' class='bunnypart_face previewPart' style='background-color: white'></div>")
+					.append("<div id='bunnyface_eyeline_left' class='bunnypart_face previewPart line' style='background-color:white'></div>")
+					.append("<div id='bunnyface_eyeline_right' class='bunnypart_face previewPart line' style='background-color:white'></div>")
+					.append("<div id='bunnyface_nose' class='bunnypart_face previewPart accentable' style='background-color:pink'></div>")
+					.append("<div id='bunnyface_chin' class='bunnypart_face previewPart yarnable contrastable' style='background-color:black'></div>")
 						
 				$(".previewdiv_profile").empty()
 					//permanent
@@ -388,7 +414,7 @@ $(document).ready(function() {
 
 					$("#welcome1").append("<div id='welcome_fulllogo' alt='Kniterative Designs'></div>")
 						
-						.after("<div id='welcome2'>Welcome to the Kniterative Designs custom orders website.<br>Here you can design your own knitted animal by choosing the yarn texture, yarn color, and pattern that you want. Feel free to try different combinations until you find the one that's just right.<br>Ready?</div>");
+						.after("<div id='welcome2'>Welcome to the Kniterative Designs custom orders website.<div id='welcome2_textbody'>Here you can design your own knitted animal by choosing the yarn texture, yarn color, and pattern that you want.<br>Feel free to try different combinations until you find the one that's just right.<br>Ready?</div></div>");
 					$("#welcome2").append("<button id='start' class='btn btn-lg' style='background-color:gray'><b>Enter Site</b></button>");
 
 				//Click
@@ -925,6 +951,9 @@ $(document).ready(function() {
 
 				createPreviews();
 
+					var start = get("start")
+					console.log(start);
+
 				//get item from data div
 					var item = get("item");
 					item = item.replace(/%20/g, " ").replace(/\+/g, " ");
@@ -988,13 +1017,13 @@ $(document).ready(function() {
 				//add eye color
 					if ( (get("item") === "cat") || (get("item") === "dog") ) {
 						var eyeColors = {
-							"brown":"#aa5522",
-							"yellow":"#55aa00",
-							"blue":"#0000ff",
-							"green":"#00ff00",
-							"red":"#ff0000",
-							"purple":"#5500aa",
-							"orange":"#cc1100",
+							"brown":"#4d0000",
+							"yellow":"#ffff80",
+							"blue":"#b3d9ff",
+							"green":"#ccff66",
+							"red":"#ff3300",
+							"purple":"#800080",
+							"orange":"#ff9933",
 							"black":"#000000"
 						}
 						$(".accentable").css("background-color", eyeColors[accent_color]);
@@ -1024,7 +1053,7 @@ $(document).ready(function() {
 					}
 
 					$("#optionsScroll").append("<div id='congratulations'></div>");
-					$("#congratulations").append("Congratulations!<br>Your " + item + " looks great! I'll start knitting it right away!")
+					$("#congratulations").append("Your " + item + " looks great! I'll start knitting it right away!")
 						.append("<br>Please give me your email address so I can contact you regarding your order.")
 
 				//buttons
@@ -1078,7 +1107,7 @@ $(document).ready(function() {
 
 				$("#preview").remove();
 				$("#options").remove();
-				$("#header").after("<div id='successMessage'>Success!</div>");
+				$("#content").html("<div id='successMessage'>Success!<br>Thank you for your order.<br><br><a target='_blank' href=" + location.search.replace(/\&submit\=[^\&]*/g,"") + "'>See and share your new friend by clicking here!</a></div>");
 			}
 	
 	}
