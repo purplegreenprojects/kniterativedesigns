@@ -781,7 +781,7 @@ $(document).ready(function() {
 						if(!$(this).hasClass("active")) {
 							$(this).removeClass("btn-default").addClass("btn-success");
 							var cc_areas = this.value;
-							cc_areasArray = cc_areas.split(",");
+							cc_areasArray = cc_areas.split(/,|\%2C/g);
 
 							for (i = 0; i < cc_areasArray.length; i++) {
 								$("#" + cc_areasArray[i]).show().css("background-image", "url(" + ccURL + ")");
@@ -792,7 +792,7 @@ $(document).ready(function() {
 						if (!$(this).hasClass("active")) {
 							$(this).addClass("btn-default").removeClass("btn-success");
 							var cc_areas = this.value;
-							cc_areasArray = cc_areas.split(",");
+							cc_areasArray = cc_areas.split(/,|\%2C/g);
 
 							for (i = 0; i < cc_areasArray.length; i++) {
 								$("#" + cc_areasArray[i]).hide().css("background-image", "url(" + mcURL + ")");
@@ -860,7 +860,7 @@ $(document).ready(function() {
 				//get active CC_areas from data div
 					var active_cc_areas = get("cc_areas");
 					active_cc_areas = active_cc_areas.replace(/%20/g, " ").replace(/\+/g, " ");
-					active_cc_areasArray = active_cc_areas.split(",");
+					active_cc_areasArray = active_cc_areas.split(/,|\%2C/g);
 					console.log(active_cc_areasArray);
 
 				//append the preview divs
@@ -977,7 +977,7 @@ $(document).ready(function() {
 				//get active CC_areas from data div
 					var active_cc_areas = get("cc_areas");
 					active_cc_areas = active_cc_areas.replace(/%20/g, " ").replace(/\+/g, " ");
-					active_cc_areasArray = active_cc_areas.split(",");
+					active_cc_areasArray = active_cc_areas.split(/,|\%2C/g);
 					console.log(active_cc_areasArray);
 
 				//get accent color
